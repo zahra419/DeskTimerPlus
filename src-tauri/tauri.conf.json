@@ -7,8 +7,8 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "timer",
-    "version": "1.0.0"
+    "productName": "Timer",
+    "version": "0.1.0"
   },
   "tauri": {   
     "allowlist": {
@@ -27,11 +27,14 @@
       },
       "externalBin": [],
       "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
         "icons/icon.png",
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "com.officialTimerByBawafiZahra",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -50,7 +53,7 @@
       }
     },
     "security": {
-      "csp": null
+      "csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
     },
     "updater": {
       "active": false
@@ -61,7 +64,7 @@
         "height": 600,
         "resizable": true,
         "title": "Timer",
-        "width": 500,
+        "width": 700,
         "center":true,
         "theme":"Dark"
       }

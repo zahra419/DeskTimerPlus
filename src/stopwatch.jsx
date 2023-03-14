@@ -31,9 +31,9 @@ function Stopwatch() {
 
       <p className="display" data-testid="display_stopwatch">{setToString(hrs)}:{setToString(mins)}:{setToString(secs)}</p>
       <div className="btn_box">
-        {!on ? <img title="play_stopwatch" onClick={() => { setOnTo(true) }} src="/src/assets/playButton.svg" />
-          : <img title="pause_stopwatch" onClick={() => { setOnTo(false) }} src="/src/assets/pauseButton.svg" />}
-        <img title="reset_stopwatch" onClick={reset} src="/src/assets/replayButton.svg" />
+        {!on ? <img title="play_stopwatch" onClick={() => { setOnTo(true) }} src="playButton.png" />
+          : <img title="pause_stopwatch" onClick={() => { setOnTo(false) }} src="pauseButton.png" />}
+        <img title="reset_stopwatch" onClick={reset} src="replayButton.png" />
       </div>
     </div>
   );

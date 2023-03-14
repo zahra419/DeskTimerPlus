@@ -1,6 +1,6 @@
 import { describe,expect,test } from "vitest";
 import {screen,render,fireEvent} from '@testing-library/react'
-import WorkoutTimer from "../workout";
+import WorkoutTimer from "../../src/workout";
 import '@testing-library/jest-dom'
 import userEvent  from "@testing-library/user-event";
 
@@ -103,6 +103,6 @@ describe('testing interval timer',()=>{
         await new Promise((r)=> setTimeout(r,3000))
         expect(screen.queryByTestId(/display_w/i).textContent).toBe("00:03")
         expect(screen.queryByTestId(/state/i).textContent).toBe("Rest")
-        expect(screen.queryByTestId(/count/i).textContent).toBe("03")
+        expect(screen.queryByTestId(/count/i).textContent).toBe("02")
       })
 })

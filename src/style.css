@@ -6,6 +6,7 @@
   margin:0 ;
   text-transform: capitalize;
   --hue: 0,0%;
+  --size: 10vw;
 }
 
 .menu{
@@ -66,27 +67,29 @@ input{
   gap: 25px;
 
 }
+.btn_box{
+  width: 70vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+}
 img{
-  width: 4rem;
-  height:4rem;
-  margin-inline: 2rem;
+  width: 4em;
+  height: 4em;
   opacity: 1;
 }
 img:hover{
   transform: translateY(-2px);
   opacity: .8;
 }
-.btn_box{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
+
 .display{
-  font-size: 10vw;
+  font-size: var(--size);
   font-weight: bolder;
 }
 .interval_timer{
-  font-size: 10vw;
+  font-size: var(--size);
+  font-weight: bolder;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   place-items: center;

@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import {updateTimer,setToString,toNumber} from './hook';
-import bell from './assets/bell.mp3'
-import one_minute_left from './assets/one_minute_left.mp3'
+import beep from './assets/beep.mp3'
 import "./style.css";
 
 
@@ -33,11 +32,9 @@ export default function App() {
 if(timer.secs > 0){
   setTimer((timer)=>({...timer,secs:timer.secs-1}))
 }
-if(timer.hrs==0 & timer.mins==1 & timer.secs==1){
-  new Audio(one_minute_left).play()
-}
+
 if(timer.mins==0 & timer.hrs==0 & timer.secs==1){
-  new Audio(bell).play()
+  new Audio(beep).play()
 }
   },on?1000:null)
 
@@ -78,10 +75,10 @@ if(timer.mins==0 & timer.hrs==0 & timer.secs==1){
      </div>
      <p className="display" data-testid="display_timer">{setToString(timer.hrs)}:{setToString(timer.mins)}:{setToString(timer.secs)}</p>
      <div className="btn_box">
-     {!on ? <img title="play_timer"  onClick={start} src="src/assets/playButton.svg"  /> :
-      <img title="pause_timer" onClick={()=>setOnTo(false)} src="src/assets/pauseButton.svg"/>
+     {!on ? <img title="play_timer"  onClick={start} src="playButton.png"  /> :
+      <img title="pause_timer" onClick={()=>setOnTo(false)} src="pauseButton.png"/>
      }
-     <img title="reset_timer" onClick={clear} src="src/assets/replayButton.svg"/> 
+     <img title="reset_timer" onClick={clear} src="replayButton.png"/> 
     
      </div>
    

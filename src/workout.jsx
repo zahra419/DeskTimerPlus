@@ -1,6 +1,6 @@
 import { useRef,useState} from "react";
 import {updateTimer,setToString, convertTimer,toNumber} from './hook';
-import bell from './assets/bell.mp3'
+import beep from './assets/beep.mp3'
 
 function WorkoutTimer() {
     const [workout, setWorkout] = useState(0);
@@ -27,7 +27,7 @@ function WorkoutTimer() {
           if(time.counter==1 & status=="Workout"){
             setSets(set-1)
               setTime((time)=>({...time,counter:workout}))
-              new Audio(bell).play()
+              new Audio(beep).play()
               if(rest>1){
               setTime((time)=>({...time,counter:rest}))
               setStatus("Rest")
@@ -36,7 +36,7 @@ function WorkoutTimer() {
          
           if(time.counter==1 & status=="Rest"){
             setTime((time)=>({...time,counter:workout}))
-            new Audio(bell).play()
+            new Audio(beep).play()
               setStatus("Workout")
           }
          
@@ -88,9 +88,9 @@ function WorkoutTimer() {
            </div>
           
     <div className="btn_box">
-           {!on ?<img title="play_w"  onClick={start} src="/src/assets/playButton.svg"/>
-     :<img title="pause_w"onClick={()=>{setOnTo(false)}} src="/src/assets/pauseButton.svg"/>}
-     <img onClick={reset} title='reset_w'  src="/src/assets/replayButton.svg"/>
+           {!on ?<img title="play_w"  onClick={start} src="playButton.png"/>
+     :<img title="pause_w"onClick={()=>{setOnTo(false)}} src="pauseButton.png"/>}
+     <img onClick={reset} title='reset_w'  src="replayButton.png"/>
      </div>
     </div> );
 }

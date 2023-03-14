@@ -4,19 +4,9 @@
 )]
 
 
-
-/*#[tauri::command]
-fn time(hr: &str,min:&str,sec:&str) -> String {
-    format!(" {}:{}:{}", hr,min,sec)
-}*/
-
 fn main() {
   
-  tauri::Builder::default() 
-  
-
-        
-       /* .invoke_handler(tauri::generate_handler![time])*/
-        .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+    tauri::Builder::default() 
+   .run(tauri::generate_context!())
+   .expect("error while running tauri application");
 }
