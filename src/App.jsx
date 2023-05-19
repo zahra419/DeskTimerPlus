@@ -1,9 +1,11 @@
 import { useRef, useState } from "react";
-import {updateTimer,setToString,toNumber} from './hook';
+import {updateTimer} from './hooks/costumHook';
+import {toNumber,playAudio} from './hooks/functions';
 import beep from './assets/beep.mp3'
 import "./style.css";
-
-
+import TimerValue from "./components/timerValue";
+import Input from "./components/input";
+import Buttons from "./components/buttons"
 
 export default function App() {
   const [timer,setTimer]=useState({hrs:0,mins:0,secs:0})
@@ -34,12 +36,12 @@ if(timer.secs > 0){
 }
 
 if(timer.mins==0 & timer.hrs==0 & timer.secs==1){
-  new Audio(beep).play()
+  playAudio(beep)
 }
   },on?1000:null)
 
 
-  function clear(){
+  function reset(){
     setOnTo(false)
     hrRef.current.value=0
     minRef.current.value=0
@@ -56,31 +58,23 @@ if(timer.mins==0 & timer.hrs==0 & timer.secs==1){
       setOnTo(true)
 
     }
-    
-    
+  }
+  function pause(){
+    setOnTo(false)
   }
   return (
     <div className="box timer">
      
       <div className="input_box">
-      <label htmlFor="hrs">Hours
-     <input type="number" aria-label="hrs" min="0" max="99"   name="hrs"  placeholder="0"  ref={hrRef} ></input>
-     </label>
-     <label  htmlFor="mins">Minutes
-     <input type="number" aria-label="mins" min="0" max="59" name="mins" placeholder="0" ref={minRef}></input>
-     </label>
-     <label  htmlFor="secs">Seconds
-     <input type="number"  aria-label="secs" min="0" max="59" name="secs" placeholder="0" ref={secRef}></input>
-     </label>
-     </div>
-     <p className="display" data-testid="display_timer">{setToString(timer.hrs)}:{setToString(timer.mins)}:{setToString(timer.secs)}</p>
-     <div className="btn_box">
-     {!on ? <img title="play_timer"  onClick={start} src="playButton.png"  /> :
-      <img title="pause_timer" onClick={()=>setOnTo(false)} src="pauseButton.png"/>
-     }
-     <img title="reset_timer" onClick={clear} src="replayButton.png"/> 
+      <Input aria-label="hrs" max="99" name="hours"  ref={hrRef}/>
+      <Input max="59" name="minutes" ref={minRef} />
+      <Input max="59" name="seconds" ref={secRef} />
     
      </div>
+     <TimerValue hrs={timer.hrs} mins={timer.mins} secs={timer.secs} />
+     
+     <Buttons start={start} reset={reset} pause={pause} on={on}/>
+
    
     </div>
   );

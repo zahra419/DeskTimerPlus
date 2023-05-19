@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { loadSettings } from './localStorage';
 
 export function updateTimer(callback, delay) {
   const savedCallback = useRef(); 
@@ -25,21 +26,4 @@ export function updateTimer(callback, delay) {
   }, [delay]);
 
 }
-export function setToString(num){
-   return num.toString().padStart(2,"0")
-}
 
-export function convertTimer(num){
-  if(num<60){
-   return setToString(0)+":"+setToString(num)
-  }else{
-    return setToString(num/60 >>0)+":"+ setToString(num%60)
-  }
-}
-export function toNumber(num){
-  const parsed=parseInt(num,10)
-  if(isNaN(parsed)){
-    return 0
-  }
-  return parsed
-}

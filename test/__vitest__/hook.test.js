@@ -1,4 +1,5 @@
-import {setToString,updateTimer,convertTimer,toNumber} from "../../src/hook";
+import {setToString,convertTimer,toNumber, playAudio} from "../../src/hooks/functions";
+import {updateTimer} from "../../src/hooks/costumHook"
 import {expect,describe,it}from "vitest"
 import { renderHook} from "@testing-library/react";
 import { vi } from "vitest";
@@ -27,6 +28,7 @@ describe("test costum hook",()=>{
     })
     afterAll(()=>{
         vi.useRealTimers()
+        vi.clearAllMocks()
     })
 
     it('setInterval should function with function',()=>{
@@ -69,3 +71,6 @@ describe('should return number',()=>{
         expect(toNumber('')).toBe(0)
     })
 })
+
+
+

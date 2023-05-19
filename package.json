@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "tauri": "tauri",
-    "test": "wdio run ./wdio.conf.js",
+    "test": "vitest",
     "wdio": "wdio run ./wdio.conf.js"
   },
   "dependencies": {

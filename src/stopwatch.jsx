@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { updateTimer, setToString } from "./hook";
-
+import { updateTimer } from "./hooks/costumHook";
+import TimerValue from "./components/timerValue";
+import Buttons from './components/buttons'
 function Stopwatch() {
   const [secs, setSeconds] = useState(0)
   const [mins, setMinutes] = useState(0)
   const [hrs, setHours] = useState(0)
-  const [on, setOnTo] = useState(0)
+  const [on, setOnTo] = useState(false)
   updateTimer(() => {
       setSeconds(secs + 1)
       if (secs == 59) {
@@ -25,16 +26,16 @@ function Stopwatch() {
     setMinutes(0)
     setSeconds(0)
   }
+  function start(){
+    setOnTo(true);
+  }
+  function pause(){
+    setOnTo(false)
+  }
   return (
     <div className="box stopwatch">
-
-
-      <p className="display" data-testid="display_stopwatch">{setToString(hrs)}:{setToString(mins)}:{setToString(secs)}</p>
-      <div className="btn_box">
-        {!on ? <img title="play_stopwatch" onClick={() => { setOnTo(true) }} src="playButton.png" />
-          : <img title="pause_stopwatch" onClick={() => { setOnTo(false) }} src="pauseButton.png" />}
-        <img title="reset_stopwatch" onClick={reset} src="replayButton.png" />
-      </div>
+      <TimerValue hrs={hrs} mins={mins} secs={secs} />
+      <Buttons start={start} reset={reset} pause={pause} on={on}/>
     </div>
   );
 }
