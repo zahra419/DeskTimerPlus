@@ -12,14 +12,18 @@ describe('testing navigation',()=>{
         expect(document.querySelector('.timer')).toBeInTheDocument()
         expect(document.querySelector('.stopwatch')).not.toBeInTheDocument()
         expect(document.querySelector('.interval')).not.toBeInTheDocument()
+        expect(document.querySelector('.settings_container')).not.toBeInTheDocument()
         await userEvent.click(screen.getByTestId(/stopwatch/i))
         expect(document.querySelector('.stopwatch')).toBeInTheDocument()
         expect(document.querySelector('.timer')).not.toBeInTheDocument()
         expect(document.querySelector('.interval')).not.toBeInTheDocument()
+        expect(document.querySelector('.settings_container')).not.toBeInTheDocument()
         await userEvent.click(screen.getByTestId(/interval/i))
         expect(document.querySelector('.interval')).toBeInTheDocument()
         expect(document.querySelector('.stopwatch')).not.toBeInTheDocument()
         expect(document.querySelector('.timer')).not.toBeInTheDocument() 
+        expect(document.querySelector('.settings_container')).not.toBeInTheDocument()
+
     })
 
 })

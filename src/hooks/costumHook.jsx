@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { loadSettings } from './localStorage';
 
 export function updateTimer(callback, delay) {
   const savedCallback = useRef(); 

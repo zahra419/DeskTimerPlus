@@ -3,19 +3,15 @@ import WorkoutTimer from "./workout";
 import Stopwatch from "./stopwatch";
 import History from "./history";
 import {Route, NavLink, Routes } from 'react-router-dom';
-import { invoke } from "@tauri-apps/api";
-import { loadSettings } from "./hooks/localStorage";
 import Icon from "./components/icon";
-import Details from "./setting_details";
-import { useState } from "react";
-
+import SettingsPage from "./settingsPage";
+import { ContextProvider } from "./hooks/context";
 
 function Navbar() {
-   const [settings,setSettings]=useState(loadSettings())
-   //onClick={()=>invoke('open_settings_window')}
+  
     return (
-        
-            <div className={ `app  ${settings.theme}`} style={{backgroundImage:`url(${settings.backgroundImageUrl})`}} >
+        <ContextProvider >
+            
                 <div className="menu">
                  
                       <NavLink to="/" data-testid="timer" ><Icon icon="timer.svg"/></NavLink>
@@ -24,7 +20,7 @@ function Navbar() {
                   
                       <NavLink to="/interval" data-testid="interval"><Icon icon="interval.svg"/></NavLink>
             
-                      <NavLink to={{pathname:"/settings" }}><Icon icon="settings.svg"/></NavLink>
+                      <NavLink to="/settings" ><Icon icon="settings.svg"/></NavLink>
                  
                 </div>
                 <Routes>
@@ -38,16 +34,12 @@ function Navbar() {
                       element={<WorkoutTimer/>}>
                   </Route>
                   <Route exact path='/settings'
-                      element={<Details/>}>
+                      element={<SettingsPage />}>
                   </Route>
 
                 </Routes>
-
-    
-                   <History />
-
-            </div>
-            
+          
+            </ContextProvider>
     );
 }
 

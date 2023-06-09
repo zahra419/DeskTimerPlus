@@ -1,4 +1,4 @@
-import { loadSettings } from "./localStorage"
+import { loadLocalStorageValues } from "./localStorage"
 
 export function setToString(num){
     return num.toString().padStart(2,"0")
@@ -19,9 +19,19 @@ export function setToString(num){
    return parsed
  }
  export function playAudio(sound){
-   const volume=loadSettings().volume/100;
+   const volume=toNumber(loadLocalStorageValues().volume)/100;
    console.log(volume)
    let audio=new Audio(sound)
    audio.volume=volume;
    audio.play()
  }
+ export function getContrastYIQ(hexcolor){
+  var r = parseInt(hexcolor.substring(1,3),16);
+  var g = parseInt(hexcolor.substring(3,5),16);
+  var b = parseInt(hexcolor.substring(5,7),16);
+  var yiq = ((r*299)+(g*587)+(b*114))/1000;
+  return (yiq >= 128) ? '#121212' : 'white';
+}
+
+ export const fonts= ['Foldit', 'lets-go-digital-regular','Black Ops One']
+ export const colors=['#000000','#F0F4F9','#A6A6A6','#C4E7E1','#F8BBB8','#004D59','#137BB2','#546E7A']

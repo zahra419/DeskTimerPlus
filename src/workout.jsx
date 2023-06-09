@@ -4,7 +4,7 @@ import {toNumber,playAudio,setToString,convertTimer} from './hooks/functions';
 import beep from './assets/beep.mp3'
 import Input from "./components/input";
 import Buttons from "./components/buttons"
-
+import { notification } from "./components/notification";
 function WorkoutTimer() {
     const [workout, setWorkout] = useState(0);
     const [rest, setRest] = useState(0);
@@ -22,6 +22,7 @@ function WorkoutTimer() {
         }
        
         if(set==0){
+          //notification({title:'Timer',body:'Time is up ! Well done!'})
           setStatus("Done")
           setOnTo(false)
           return
@@ -33,12 +34,14 @@ function WorkoutTimer() {
               new Audio(beep).play()
               if(rest>1){
               setTime((time)=>({...time,counter:rest}))
+              //notification({title:'Timer',body:'Time to Rest'})
               setStatus("Rest")
               }
           }
          
           if(time.counter==1 & status=="Rest"){
             setTime((time)=>({...time,counter:workout}))
+            //notification({title:'Timer',body:'Time to START'})
             new Audio(beep).play()
               setStatus("Workout")
           }

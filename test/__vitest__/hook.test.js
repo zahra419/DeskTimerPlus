@@ -1,4 +1,4 @@
-import {setToString,convertTimer,toNumber, playAudio} from "../../src/hooks/functions";
+import {setToString,convertTimer,toNumber, playAudio,getContrastYIQ} from "../../src/hooks/functions";
 import {updateTimer} from "../../src/hooks/costumHook"
 import {expect,describe,it}from "vitest"
 import { renderHook} from "@testing-library/react";
@@ -72,5 +72,11 @@ describe('should return number',()=>{
     })
 })
 
+describe('should return contrasting color',()=>{
+    it('should return contrasting color',()=>{
+       expect(getContrastYIQ('#ffffff')).toBe('#121212')
+    })
+})
 
 
+ 

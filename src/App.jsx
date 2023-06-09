@@ -5,7 +5,8 @@ import beep from './assets/beep.mp3'
 import "./style.css";
 import TimerValue from "./components/timerValue";
 import Input from "./components/input";
-import Buttons from "./components/buttons"
+import Buttons from "./components/buttons";
+import { notification } from "./components/notification";
 
 export default function App() {
   const [timer,setTimer]=useState({hrs:0,mins:0,secs:0})
@@ -37,6 +38,7 @@ if(timer.secs > 0){
 
 if(timer.mins==0 & timer.hrs==0 & timer.secs==1){
   playAudio(beep)
+  //notification({ title: 'Timer', body: 'Time is up! ' });
 }
   },on?1000:null)
 
