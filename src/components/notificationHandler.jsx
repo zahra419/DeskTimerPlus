@@ -4,7 +4,6 @@ import { useContext } from "react";
 function NotificationHandler() {
     const [settings,setSettings]=useContext(StyleContext)
     const [checked,setChecked]=useState(settings.notification)
-    console.log(settings.notification)
     const notificationHandler=()=>{
     
         setChecked(!checked)

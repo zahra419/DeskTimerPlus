@@ -7,7 +7,7 @@ function FontsList() {
         <span><b>Fonts</b></span>
         <div className="fonts_list" role="font_list">
         {fonts.map((font,index)=>{
-          return <FontOption Key={index} font={font}/>
+          return <FontOption key={index} font={font}/>
         })}
        </div>
        </div>

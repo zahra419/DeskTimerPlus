@@ -1,12 +1,10 @@
 import { useRef, useState } from "react";
 import {updateTimer} from './hooks/costumHook';
-import {toNumber,playAudio} from './hooks/functions';
-import beep from './assets/beep.mp3'
-import "./style.css";
+import {toNumber,playBeepSound} from './hooks/functions';
 import TimerValue from "./components/timerValue";
 import Input from "./components/input";
 import Buttons from "./components/buttons";
-import { notification } from "./components/notification";
+import { sendingNotification } from "./components/notification";
 
 export default function App() {
   const [timer,setTimer]=useState({hrs:0,mins:0,secs:0})
@@ -37,8 +35,8 @@ if(timer.secs > 0){
 }
 
 if(timer.mins==0 & timer.hrs==0 & timer.secs==1){
-  playAudio(beep)
-  //notification({ title: 'Timer', body: 'Time is up! ' });
+  playBeepSound()
+  sendingNotification({ title:'Timer', body:'Time is up!'});
 }
   },on?1000:null)
 
@@ -68,7 +66,7 @@ if(timer.mins==0 & timer.hrs==0 & timer.secs==1){
     <div className="box timer">
      
       <div className="input_box">
-      <Input aria-label="hrs" max="99" name="hours"  ref={hrRef}/>
+      <Input max="99" name="hours"  ref={hrRef}/>
       <Input max="59" name="minutes" ref={minRef} />
       <Input max="59" name="seconds" ref={secRef} />
     

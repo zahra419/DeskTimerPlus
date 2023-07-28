@@ -4,7 +4,6 @@ import { StyleContext } from "../hooks/context";
 function VolumeHandler() {
     const [settings,updateSettings]=useContext(StyleContext)
     const [volume,setVolume]=useState(settings.volume);
-    console.log(volume)
     const volumeHandler=(event)=>{
         const vol=event.currentTarget.value;
         setVolume(vol)  

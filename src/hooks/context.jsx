@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext} from "react";
 import { loadLocalStorageValues,updateLocalStorageValues } from "./localStorage";
-import { getContrastYIQ } from "./functions";
+
 
 
 const initialValues=loadLocalStorageValues()
@@ -18,7 +18,7 @@ export function ContextProvider(props){
             backgroundColor: `${settingsValues.backgroundColor}`,
             color: `${settingsValues.color}`
         })
-        console.log(loadLocalStorageValues())
+       
     },[settings.volume,settings.fontFamily,settings.backgroundColor,settings.color,settings.notification])
     return(
         <StyleContext.Provider value={[settings,setSettings]}>

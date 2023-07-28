@@ -5,7 +5,7 @@ function TimerValue({hrs,mins,secs}) {
 
 
     return ( 
-        <p className="display" role="timer_value">{setToString(hrs)}:{setToString(mins)}:{setToString(secs)}</p>
+        <p className="timer_value" data-testid="timer_value">{setToString(hrs)}:{setToString(mins)}:{setToString(secs)}</p>
      );
 }
 

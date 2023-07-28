@@ -1,6 +1,6 @@
 function Icon(props) {
     return ( 
-        <img role="menu_icon" className="icon" src={props.icon}/>
+        <img className="icon" src={props.icon} alt=""/>
      );
 }
 

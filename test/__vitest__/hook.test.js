@@ -35,7 +35,7 @@ describe("test costum hook",()=>{
         const result=renderHook(()=>{updateTimer(callback,1000)})
         expect(callback).not.toHaveBeenCalled()
         expect(result.current).toBeUndefined()
-        //test setTimeout used in hook 
+        //test setTimeout used in costum hook 
         expect(setTimeout).toBeCalledTimes(1)
         expect(setTimeout).toBeCalledWith(expect.any(Function),1000)
     })

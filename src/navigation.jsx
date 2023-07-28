@@ -1,11 +1,10 @@
 import App from "./App";
 import WorkoutTimer from "./workout";
 import Stopwatch from "./stopwatch";
-import History from "./history";
 import {Route, NavLink, Routes } from 'react-router-dom';
 import Icon from "./components/icon";
-import SettingsPage from "./settingsPage";
 import { ContextProvider } from "./hooks/context";
+import SettingsPage from "./settingsPage";
 
 function Navbar() {
   
@@ -20,7 +19,7 @@ function Navbar() {
                   
                       <NavLink to="/interval" data-testid="interval"><Icon icon="interval.svg"/></NavLink>
             
-                      <NavLink to="/settings" ><Icon icon="settings.svg"/></NavLink>
+                      <NavLink to={"/settings"} data-testid="settings"><Icon icon="settings.svg"/></NavLink>
                  
                 </div>
                 <Routes>
@@ -34,7 +33,7 @@ function Navbar() {
                       element={<WorkoutTimer/>}>
                   </Route>
                   <Route exact path='/settings'
-                      element={<SettingsPage />}>
+                      element={<SettingsPage/>}>
                   </Route>
 
                 </Routes>
