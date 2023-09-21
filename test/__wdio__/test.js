@@ -41,6 +41,7 @@ before(async function () {
   capabilities.setBrowserName('wry')
 
   // start the webdriver client
+  //4445
   driver = await new Builder()
     .withCapabilities(capabilities)
     .usingServer('http://localhost:4445/')
@@ -54,3 +55,4 @@ after(async function () {
   // kill the tauri-driver process
   tauriDriver.kill()
 })
+

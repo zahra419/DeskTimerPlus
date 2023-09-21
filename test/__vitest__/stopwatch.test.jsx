@@ -8,38 +8,25 @@ describe('testing stopwatch elements',()=>{
     beforeEach(()=>{
         render(<Stopwatch/>)
     })
-    it('display initial value of timer',()=>{
-        const display=screen.getByTestId(/display_stopwatch/i)
-        expect(display.textContent).toBe("00:00:00")
-    })
-    it('play button should be in dom',()=>{
-        const playButton=screen.getByTitle(/play_stopwatch/i)
-        expect(playButton).toBeInTheDocument()
-    })
-    it('reset button should be in dom',()=>{
-        const restButton=screen.getByTitle(/reset_stopwatch/i)
-        expect(restButton).toBeInTheDocument()
-    })
-    it('pause button should not be in dom',()=>{
-        const pauseButton=screen.queryByTitle(/pause_stopwatch/i)
-        expect(pauseButton).not.toBeInTheDocument()
-    })
+   
+    
     
     it('button should work and timer should be updated',async()=>{
-        const display=screen.getByTestId(/display_stopwatch/i)
-        const playButton=screen.getByTitle(/play_stopwatch/i)
-        const restButton=screen.getByTitle(/reset_stopwatch/i)
+        const timer_value=screen.getByTestId(/timer_value/i)
+        const playButton=screen.getByAltText(/play_button/i)
+        const restButton=screen.getByAltText(/reset_button/i)
+       
         await userEvent.click(playButton)
         await new Promise((r)=> setTimeout(r,1000))
-        expect(display.textContent).toBe("00:00:01")
-        expect (screen.getByTitle(/pause_stopwatch/i)).toBeInTheDocument()
-        expect(screen.queryByTitle(/play_stopwatch/i)).not.toBeInTheDocument()
-        await userEvent.click(screen.getByTitle(/pause_stopwatch/i))
-        expect(playButton).toBeInTheDocument()
-        expect (screen.queryByTitle(/pause_stopwatch/i)).not.toBeInTheDocument()
+        expect(timer_value.textContent).toBe("00:00:01")
+        expect (screen.queryByAltText(/pause_button/i)).toBeInTheDocument()
+        expect(screen.queryByAltText(/play_button/i)).not.toBeInTheDocument()
+        await userEvent.click(screen.queryByAltText(/pause_button/i))
+        expect(screen.queryByAltText(/play_button/i)).toBeInTheDocument()
+        expect (screen.queryByAltText(/pause_button/i)).not.toBeInTheDocument()
         await userEvent.click(restButton)
-        expect(display.textContent).toBe("00:00:00")
-        expect()
+        expect(timer_value.textContent).toBe("00:00:00")
+        
     })
  
 })

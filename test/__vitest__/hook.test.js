@@ -1,4 +1,5 @@
-import {setToString,updateTimer,convertTimer,toNumber} from "../../src/hook";
+import {setToString,convertTimer,toNumber, playAudio,getContrastYIQ} from "../../src/hooks/functions";
+import {updateTimer} from "../../src/hooks/costumHook"
 import {expect,describe,it}from "vitest"
 import { renderHook} from "@testing-library/react";
 import { vi } from "vitest";
@@ -27,13 +28,14 @@ describe("test costum hook",()=>{
     })
     afterAll(()=>{
         vi.useRealTimers()
+        vi.clearAllMocks()
     })
 
     it('setInterval should function with function',()=>{
         const result=renderHook(()=>{updateTimer(callback,1000)})
         expect(callback).not.toHaveBeenCalled()
         expect(result.current).toBeUndefined()
-        //test setTimeout used in hook 
+        //test setTimeout used in costum hook 
         expect(setTimeout).toBeCalledTimes(1)
         expect(setTimeout).toBeCalledWith(expect.any(Function),1000)
     })
@@ -69,3 +71,12 @@ describe('should return number',()=>{
         expect(toNumber('')).toBe(0)
     })
 })
+
+describe('should return contrasting color',()=>{
+    it('should return contrasting color',()=>{
+       expect(getContrastYIQ('#ffffff')).toBe('#121212')
+    })
+})
+
+
+ 

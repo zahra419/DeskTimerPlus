@@ -1,97 +1,105 @@
 import { useRef,useState} from "react";
-import {updateTimer,setToString, convertTimer,toNumber} from './hook';
-import beep from './assets/beep.mp3'
-
+import {updateTimer} from './hooks/costumHook';
+import {toNumber,playBeepSound,setToString,convertTimer} from './hooks/functions';
+import Input from "./components/input";
+import Buttons from "./components/buttons"
+import ProgressBar from "./components/progressBar";
+import { sendingNotification } from "./components/notification";
 function WorkoutTimer() {
-    const [workout, setWorkout] = useState(0);
+    const [work, setWork] = useState(0);
     const [rest, setRest] = useState(0);
-    const [set, setSets] = useState(0);
+    const [set, setSets] = useState({currentSet:0,totalSets:0});
     const [on,setOnTo]=useState(false);
     const [time,setTime]=useState({counter:0,total:0})
-    const workoutRef=useRef(0)
+    const workRef=useRef(0)
     const restRef=useRef(0)
     const setRef=useRef(0)
-    const [status,setStatus]=useState("Start")
-
+    const [status,setStatus]=useState("start")
     updateTimer(()=>{
-        if(workout==0 & set==0){
+        if(work==0 & set.totalSets==0){                       
           return
         }
-       
-        if(set==0){
-          setStatus("Done")
-          setOnTo(false)
-          return
-        }
+        
+          
           setTime((time)=>({counter:time.counter-1,total:time.total+1}))
-          if(time.counter==1 & status=="Workout"){
-            setSets(set-1)
-              setTime((time)=>({...time,counter:workout}))
-              new Audio(beep).play()
-              if(rest>1){
-              setTime((time)=>({...time,counter:rest}))
-              setStatus("Rest")
+          if(time.counter==1 & status=="work"){
+            if(set.totalSets==set.currentSet){
+              setTime((time)=>({...time,counter:0}))
+                sendingNotification({ title:'Timer', body:'Time is up!'});
+                setStatus("done")
+                setOnTo(false)
+                return     
               }
+              setSets((set)=>({...set,currentSet:set.currentSet+1}))
+              playBeepSound()
+              if(rest==0){
+                setTime((time)=>({...time,counter:work}))
+              }else{
+                setTime((time)=>({...time,counter:rest}))
+                setStatus("rest")
+              }
+              
           }
+        
          
-          if(time.counter==1 & status=="Rest"){
-            setTime((time)=>({...time,counter:workout}))
-            new Audio(beep).play()
-              setStatus("Workout")
+          if(time.counter==1 & status=="rest"){
+            setTime((time)=>({...time,counter:work}))
+              playBeepSound()
+              setStatus("work")
           }
          
         },on?1000:null)
     
 
         function start(){
-          if(workoutRef.current.value<=1 | setRef.current.value<=0){
+          if(workRef.current.value<=1 | setRef.current.value<=0){
             return
           }
-          if(status!="Done" & time.total>0){
+          if(status!="done" & time.total>0){
             setOnTo(true)
           }else{
-            setWorkout(toNumber(workoutRef.current.value))
+            setWork(toNumber(workRef.current.value))
             setRest(toNumber(restRef.current.value))
-            setSets(toNumber(setRef.current.value))
-            setTime({counter:toNumber(workoutRef.current.value),total:0})
-            setStatus("Workout")
+            setSets({currentSet:1,totalSets:toNumber(setRef.current.value)})
+            setTime({counter:toNumber(workRef.current.value),total:0})
+            setStatus("work")
             setOnTo(true)
           }
        }
     function reset(){
       setOnTo(false)
-      workoutRef.current.value=0
+      workRef.current.value=0 
       restRef.current.value=0
       setRef.current.value=0
       setTime({counter:0,total:0})
-      setStatus("Start")
+      setSets({currentSet:0,totalSets:0})
+      setStatus("start")
     }
-    
+    function pause(){
+      setOnTo(false)
+    }
    
     return ( <div className="box interval">
        <div className="input_box">
-    <label htmlFor="workout">Workout
-    <input type="number" aria-label="workout" min="0" placeholder="0s" ref={workoutRef} name="workout"></input>
-    </label>
-    <label htmlFor="rest">rest 
-    <input type="number" aria-label="rest" min="0"  placeholder="0s" ref={restRef} name="rest"></input>
-    </label>
-    <label htmlFor="sets">sets
-    <input type="number" aria-label="sets" min="0" placeholder="0" ref={setRef} name="sets"></input>
-    </label>
+        <Input name="work" max="" ref={workRef}/>
+        <Input name="rest" max="" ref={restRef}/>
+        <Input name="sets" max="" ref={setRef} />
+   
     </div>
     
     <div className="interval_timer">
+              <div className="current_time">
               <span   data-testid="count">{setToString(time.counter)}</span>
               <span  id="state" data-testid="state">{status}</span>
-              <span data-testid="display_w">{convertTimer(time.total)}</span>
+              </div>
+              <span className="total_timer" role="total_value">{convertTimer(time.total)}</span>
+              <span className="current_set">{`${set.currentSet}/${set.totalSets}`}</span>
+              <ProgressBar max={status=='work'? work:status=='rest'? rest:0} value={time.counter}/>
+              
            </div>
           
-    <div className="btn_box">
-           {!on ?<img title="play_w"  onClick={start} src="playButton.png"/>
-     :<img title="pause_w"onClick={()=>{setOnTo(false)}} src="pauseButton.png"/>}
-     <img onClick={reset} title='reset_w'  src="replayButton.png"/>
-     </div>
+           <Buttons start={start} reset={reset} pause={pause} on={on}/>
+
     </div> );
 }
 

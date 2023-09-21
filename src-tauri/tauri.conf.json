@@ -7,12 +7,16 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "timer",
-    "version": "0.1.0"
+    "productName": "desk_timer_plus",
+    "version": "0.2.0"
   },
   "tauri": {   
     "allowlist": {
       "all": false,
+      "notification": {
+        "all": true 
+      },
+     
       "shell": {
         "all": false,
         "open": true
@@ -63,7 +67,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "Timer",
+        "title": "DeskTimerPlus",
         "width": 700,
         "center":true,
         "theme":"Dark"
