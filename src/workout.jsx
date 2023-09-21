@@ -24,6 +24,7 @@ function WorkoutTimer() {
           if(time.counter==1 & status=="work"){
             if(set.totalSets==set.currentSet){
               setTime((time)=>({...time,counter:0}))
+                sendingNotification({ title:'Timer', body:'Time is up!'});
                 setStatus("done")
                 setOnTo(false)
                 return     
