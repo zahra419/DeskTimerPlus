@@ -4,6 +4,7 @@ import {toNumber,playBeepSound,setToString,convertTimer} from './hooks/functions
 import Input from "./components/input";
 import Buttons from "./components/buttons"
 import ProgressBar from "./components/progressBar";
+import { sendingNotification } from "./components/notification";
 function WorkoutTimer() {
     const [work, setWork] = useState(0);
     const [rest, setRest] = useState(0);
