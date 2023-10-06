@@ -7,7 +7,7 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "desk_timer_plus",
+    "productName": "DeskTimerPlus",
     "version": "0.2.0"
   },
   "tauri": {   
